@@ -1,0 +1,31 @@
+<template>
+    <div class="container">
+        <div class="product_recommendation_title_div">
+                <h3 class="product_recommendation_title">{title}</h3>
+                <div class="view_all_link_div">
+                    <template if:true={isProducts}><a onclick={handleViewAllLink} class="view_all_link">{viewAllTitle}</a></template>
+                </div>
+        </div>
+   </div>
+
+    <div class="product_recommendation_outer_container">
+        <div class="product_recommendation_inner_container">
+            <div class="product_recommendation_div">
+                <template if:true={isProducts}>  
+                    <lightning-layout multiple-rows>
+                        <template for:each={fourFeaturedProductsWrapper} for:item="featuredProduct" for:index="index">
+                            <!--template key={featuredProduct.product.Id} -->
+                                <div key={featuredProduct.product.Id} class="product_container">
+                                    <c-product-card featured-product={featuredProduct}></c-product-card>
+                                </div>
+                            <!--/template-->
+                        </template>
+                    </lightning-layout>
+                </template>
+                <template if:false={isProducts}>
+                    <div class="no_result_text">{noProducts}.</div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>
